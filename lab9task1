@@ -1,0 +1,54 @@
+def Open(pr1, pr2):
+    try:
+        pr3 = open(pr1, pr2)
+    except Exception as e:
+        print(f"файл {pr1} не вдалося відкрити! Помилка: {e}")
+        return None
+    else:
+        print(f"файл {pr1} успішно відкрито!")
+        return pr3
+
+
+# Імена файлів
+pr4 = "TF4_1.txt"
+pr5 = "TF4_2.txt"
+
+pr6 = Open(pr4, "w")
+if pr6 is not None:
+    pr6.write("тест1")
+    pr6.write("тест2")
+    pr6.write("тест3")
+    pr6.close()
+    print("інформація успішно додана до TF4_1.txt!")
+
+pr7 = Open(pr4, "r")
+pr8 = Open(pr5, "w")
+if pr7 is not None and pr8 is not None:
+    pr9 = {}
+
+    for pr10 in pr7:
+        pr11 = pr10.split()
+        for pr12 in pr11:
+            pr13 = ''.join(filter(str.isalnum, pr12))
+            length = len(pr13)
+            if length > 0:
+                if length in pr9:
+                    pr9[length] += 1
+                else:
+                    pr9[length] = 1
+
+    for length in sorted(pr9.keys()):
+        pr8.write(f"{length} символів: {pr9[length]} слів\n")
+
+    pr7.close()
+    pr8.close()
+    print("результати успішно записані у TF4_2.txt!")
+
+pr14 = Open(pr5, "r")
+if pr14 is not None:
+    print("\nвміст файлу TF4_2.txt:")
+    for pr15 in pr14:
+        print(pr15.strip())
+
+    pr14.close()
+    print("файл TF4_2.txt був закритий.")
