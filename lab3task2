@@ -1,0 +1,16 @@
+def finddubli(word):
+    duplicates = []
+    for letter in word:
+        if word.count(letter) > 1 and letter not in duplicates:
+            duplicates.append(letter)
+    return duplicates
+
+
+if __name__ == "__main__":
+    input_word = input("введіть слово: ")
+    result = finddubli(input_word)
+
+    if result:
+        print("повторювані літери:", ', '.join(result))
+    else:
+        print("повторюваних літер немає")
