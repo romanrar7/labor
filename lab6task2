@@ -1,0 +1,10 @@
+def poshuk_poslidovnosti(spysok, poslidovnist):
+    if str(poslidovnist)[1:-1] in str(spysok)[1:-1]:
+        print(f"послідовність {poslidovnist} знайдена")
+    else:
+        print(f"послідовність {poslidovnist} не знайдена")
+
+spysok = list(map(int, input("елементи основного списку: ").split()))
+poslidovnist = list(map(int, input("елементи послідовності: ").split()))
+
+poshuk_poslidovnosti(spysok, poslidovnist)
