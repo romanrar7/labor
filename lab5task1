@@ -1,0 +1,22 @@
+N = int(input("кількість елементів у масиві: "))
+
+array = []
+
+print("елементи масиву:")
+for i in range(N):
+    element = float(input(f"елемент {i+1}: "))
+    array.append(element)
+
+s1 = 0
+s2 = 0
+
+for num in array:
+    if num < 0:
+        s1 += num
+        s2 += 1
+
+if s2 > 0:
+    average = s1 / s2
+    print(f"середнє арифметичне відємних масивів: {average}")
+else:
+    print("у масиві немає відємних елементів.")
