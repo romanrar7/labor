@@ -1,0 +1,35 @@
+import module
+#функція першого завдання
+def calculate_z(m):
+    try:
+        V = 1
+        z = 1 / (V * m + 2)
+        return z
+    except ZeroDivisionError:
+        return "помилка в діленні на нуль."
+#функція другого завдання
+def total_distance(days):
+    initial_distance = 10
+    total = 0
+
+    for day in range(1, days + 1):
+        total += initial_distance
+        initial_distance *= 1.1  # збільшуємо на 10 відсотків
+
+    return total
+
+
+if __name__ == "__main__":
+    try:
+        m = float(input("значення m: "))
+        z_result = calculate_z(m)
+        print(f"результат z: {z_result}")
+    except ValueError:
+        print("помлка")
+
+    try:
+        n = int(input("кількість днів тренувань: "))
+        distance_result = module.total_distance(n)
+        print(f"дистанція за {n} днів: {distance_result:.2f} км")
+    except ValueError:
+        print("помилка")
