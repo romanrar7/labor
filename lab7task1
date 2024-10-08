@@ -1,0 +1,83 @@
+countries = {
+    "Україна": {"площа": 99999999, "населення": 99999999, "континент": "Європа"},
+    "Польша": {"площа": 99999999, "населення": 99999999, "континент": "Північна Америка"},
+    "Франція": {"площа": 99999999, "населення": 99999999, "континент": "Азія"},
+    "Литва": {"площа": 99999999, "населення": 99999999, "континент": "Африка"},
+    "Нідерланди": {"площа": 99999999, "населення": 99999999, "континент": "Океанія"},
+    "Італія": {"площа": 99999999, "населення": 99999999, "континент": "Південна Америка"},
+    "Індія": {"площа": 99999999, "населення": 99999999, "континент": "Азія"},
+    "Турція": {"площа": 99999999, "населення": 99999999, "континент": "Африка"},
+    "Японія": {"площа": 99999999, "населення": 99999999, "континент": "Азія"},
+    "Німеччина": {"площа": 99999999, "населення": 99999999, "континент": "Європа"}
+}
+
+
+def print_countries(countries):
+    for country, data in countries.items():
+        print(f"{country}: Площа: {data['площа']} км², Населення: {data['населення']}, Континент: {data['континент']}")
+
+
+def add_country(countries, name, area, population, continent):
+    countries[name] = {"площа": area, "населення": population, "континент": continent}
+    print(f"Добавлено країну: {name}.")
+
+
+def delete_country(countries, name):
+    if name in countries:
+        del countries[name]
+        print(f"Видалено країну: {name}.")
+    else:
+        print(f"Країна '{name}' не знайдена у словнику.")
+
+
+def print_sorted_countries(countries):
+    sorted_countries = {k: countries[k] for k in sorted(countries)}
+    print("Відсортований словник:")
+    print_countries(sorted_countries)
+
+
+def check_continents(countries):
+    african_asian_countries = [country for country, data in countries.items() if
+                               data['континент'] in ["Африка", "Азія"]]
+    if african_asian_countries:
+        print("Країни в Африці або Азії:", ", ".join(african_asian_countries))
+    else:
+        print("Країн в Африці або Азії не знайдено.")
+
+
+def main():
+    while True:
+        print("\nОберіть дію:")
+        print("1. Вивести всі країни")
+        print("2. Додати країну")
+        print("3. Видалити країну")
+        print("4. Вивести країни в алфавітному порядку")
+        print("5. Перевірити наявність країн в Африці або Азії")
+        print("6. Вихід")
+
+        choice = input("Ваш вибір (1-6): ")
+
+        if choice == '1':
+            print_countries(countries)
+        elif choice == '2':
+            name = input("Введіть назву країни: ")
+            area = int(input("Введіть площу країни: "))
+            population = int(input("Введіть населення країни: "))
+            continent = input("Введіть континент: ")
+            add_country(countries, name, area, population, continent)
+        elif choice == '3':
+            name = input("Введіть назву країни, яку потрібно видалити: ")
+            delete_country(countries, name)
+        elif choice == '4':
+            print_sorted_countries(countries)
+        elif choice == '5':
+            check_continents(countries)
+        elif choice == '6':
+            print("До побачення!")
+            break
+        else:
+            print("Неправильний вибір. Спробуйте ще раз.")
+
+
+if __name__ == "__main__":
+    main()
