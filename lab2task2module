@@ -1,0 +1,9 @@
+def total_distance(days):
+    initial_distance = 10
+    total = 0
+
+    for day in range(1, days + 1):
+        total += initial_distance
+        initial_distance *= 1.1
+
+    return total
