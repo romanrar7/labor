@@ -1,0 +1,12 @@
+x1 = 7
+x2 = 7
+
+array = [[0] * x1 for _ in range(x2)]
+
+for i in range(x2):
+    for j in range(x1):
+        if j >= x1 - i - 1:
+            array[i][j] = j - (x1 - i - 1) + 1
+
+for x1r in array:
+    print(x1r)
