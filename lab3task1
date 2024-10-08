@@ -1,0 +1,7 @@
+def zriz(text):
+    return text[11:14]
+
+if __name__ == "__main__":
+    input_text = input("рядок: ")
+    result = zriz(input_text)
+    print("результат:", result)
