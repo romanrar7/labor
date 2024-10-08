@@ -1,0 +1,14 @@
+def vstavka_elementa(spysok, element, pozytsiya):
+    if 0 <= pozytsiya <= len(spysok):
+        spysok.insert(pozytsiya, element)
+        print(f"після вставки елемента {element} у позицію {pozytsiya}: {spysok}")
+    else:
+        print("неправильна позиція")
+
+spysok = list(map(int, input("елементи списку через пробіл: ").split()))
+
+element = int(input("елемент, який потрібно вставити: "))
+
+pozytsiya = int(input("позиція для вставки (починаючи з 0): "))
+
+vstavka_elementa(spysok, element, pozytsiya)
