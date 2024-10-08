@@ -1,0 +1,15 @@
+def litery(text):
+    vow = set("аеєиіїоуюя")
+    con = set("бвгґджзйклмнопрстфхцчшщ")
+
+    vowels_count = len([litera for litera in text.lower() if litera in vow])
+    consonants_count = len([litera for litera in text.lower() if litera in con])
+
+    if vowels_count > consonants_count:
+        print("голосних більше:", vowels_count)
+    elif consonants_count > vowels_count:
+        print("приголосних більше:", consonants_count)
+    else:
+        print("кількість голосних і приголосних однакова:", vowels_count)
+text = input("текст: ")
+litery(text)
