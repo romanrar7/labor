@@ -1,0 +1,95 @@
+import json
+
+with open("countries.json", "w", encoding="utf-8") as file:
+    json.dump([
+        {"назва": "Україна", "площа": 603500, "населення": 40000000, "континент": "Європа"},
+        {"назва": "Франція", "площа": 551695, "населення": 67000000, "континент": "Європа"},
+        {"назва": "Німеччина", "площа": 357022, "населення": 83000000, "континент": "Європа"},
+        {"назва": "Італія", "площа": 301340, "населення": 60000000, "континент": "Європа"},
+        {"назва": "Іспанія", "площа": 505990, "населення": 47000000, "континент": "Європа"},
+        {"назва": "Польща", "площа": 312696, "населення": 38000000, "континент": "Європа"},
+        {"назва": "Швеція", "площа": 450295, "населення": 10000000, "континент": "Європа"},
+        {"назва": "Норвегія", "площа": 385207, "населення": 5400000, "континент": "Європа"},
+        {"назва": "Греція", "площа": 131957, "населення": 10000000, "континент": "Європа"},
+        {"назва": "Нідерланди", "площа": 41543, "населення": 17000000, "континент": "Європа"}
+    ], file, ensure_ascii=False, indent=4)
+
+
+def переглянути_дані():
+    with open("countries.json", "r", encoding="utf-8") as file:
+        data = json.load(file)
+        for country in data:
+            print(country)
+
+
+def додати_країну():
+    with open("countries.json", "r", encoding="utf-8") as file:
+        data = json.load(file)
+    назва = input("введіть назву країни: ")
+    площа = int(input("введіть площу: "))
+    населення = int(input("введіть населення: "))
+    континент = input("введіть континент: ")
+    data.append({"назва": назва, "площа": площа, "населення": населення, "континент": континент})
+    with open("countries.json", "w", encoding="utf-8") as file:
+        json.dump(data, file, ensure_ascii=False, indent=4)
+    print("країну додано")
+
+
+def видалити_країну():
+    with open("countries.json", "r", encoding="utf-8") as file:
+        data = json.load(file)
+    назва = input("введіть назву країни для видалення: ")
+    data = [country for country in data if country["назва"].lower() != назва.lower()]
+    with open("countries.json", "w", encoding="utf-8") as file:
+        json.dump(data, file, ensure_ascii=False, indent=4)
+    print("країну видалено")
+
+
+def знайти_країну():
+    with open("countries.json", "r", encoding="utf-8") as file:
+        data = json.load(file)
+    поле = input("введіть поле для пошуку (назва/площа/населення/континент): ").lower()
+    значення = input("введіть значення для пошуку: ")
+    if поле in ["площа", "населення"]:
+        значення = int(значення)
+    результати = [country for country in data if country[поле] == значення]
+    for результат in результати:
+        print(результат)
+
+
+def знайти_європу():
+    with open("countries.json", "r", encoding="utf-8") as file:
+        data = json.load(file)
+    результат = [country["назва"] for country in data if country["континент"] == "Європа"]
+    if результат:
+        print("країни європи:", ", ".join(результат))
+        with open("europe.json", "w", encoding="utf-8") as file:
+            json.dump(результат, file, ensure_ascii=False, indent=4)
+    else:
+        print("немає таких країн")
+
+
+while True:
+    print("\nвиберіть дію:")
+    print("1 - переглянути всі дані")
+    print("2 - додати країну")
+    print("3 - видалити країну")
+    print("4 - знайти країну")
+    print("5 - знайти всі країни європи")
+    print("6 - вийти")
+    вибір = int(input("вибрати: "))
+    if вибір == 1:
+        переглянути_дані()
+    elif вибір == 2:
+        додати_країну()
+    elif вибір == 3:
+        видалити_країну()
+    elif вибір == 4:
+        знайти_країну()
+    elif вибір == 5:
+        знайти_європу()
+    elif вибір == 6:
+        print("stop")
+        break
+    else:
+        print("помилка")
