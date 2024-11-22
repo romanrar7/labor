@@ -1,0 +1,49 @@
+import csv
+import os
+
+flag = False
+
+try:
+    with open("lab11.csv", "r", encoding="utf-8") as csvfile:
+        reader = csv.DictReader(csvfile, delimiter=";")
+        print("назва країни: 2016 [YR2016]")
+        for row in reader:
+            print(row['Country Name'], ':', row["2016 [YR2016]"])
+
+except FileNotFoundError:
+    print("файл не знайдено!")
+
+try:
+    with open("lab11.csv", "r", encoding="utf-8") as csvfile:
+        reader = csv.DictReader(csvfile, delimiter=";")
+
+        indicator = input("\nвведіть значення: ")
+
+        while not indicator.replace(".", "", 1).isdigit():
+            indicator = input("введіть значення бо вийшла помилка: ")
+
+        indicator = float(indicator)
+        os.system('cls' if os.name == 'nt' else 'clear')
+
+        print("назва країни: 2016 [YR2016]")
+
+        with open("new_lab11.csv", "w", encoding="utf-8", newline="") as csvfile2:
+            writer = csv.writer(csvfile2, delimiter=";")
+            writer.writerow(["Country Name", "2016 [YR2016]"])
+
+            for row in reader:
+                try:
+                    value = float(row["2016 [YR2016]"].replace(",", "").strip())
+                    if value > indicator:
+                        flag = True
+                        print(row["Country Name"], ":", row["2016 [YR2016]"])
+                        writer.writerow([row["Country Name"], row["2016 [YR2016]"]])
+                except ValueError:
+                    continue
+
+        if not flag:
+            os.system('cls' if os.name == 'nt' else 'clear')
+            print(f"показників ({indicator}), немає.")
+
+except FileNotFoundError:
+    print("файл не знайдено!")
