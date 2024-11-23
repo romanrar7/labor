@@ -1,0 +1,29 @@
+import matplotlib.pyplot as plt
+import numpy as np
+
+
+country = input("назва країни: ").strip()
+
+if country.lower() == 'ukraine':
+    data = [45000, 44000, 43000, 42000, 41000, 40000, 39500, 39000, 38500, 38000,
+            37500, 37000, 36000, 35000, 34000, 33000, 32500, 32000, 31000, 30000]
+    label = 'Ukraine'
+elif country.lower() == 'usa':
+    data = [1000000, 990000, 980000, 970000, 960000, 950000, 940000, 930000, 920000,
+            910000, 900000, 890000, 880000, 870000, 860000, 850000, 840000, 830000,
+            820000, 810000]
+    label = 'USA'
+else:
+    print("Країна не знайдена.")
+    exit()
+
+years = np.arange(2000, 2020)
+
+plt.figure(figsize=(10, 6))
+plt.bar(years, data, color='orange', label=label)
+plt.title(f'показник  {label}', fontsize=15)
+plt.xlabel('рік', fontsize=12)
+plt.ylabel('кількість дітей', fontsize=12)
+plt.grid(axis='y')
+plt.legend()
+plt.show()
