@@ -1,0 +1,19 @@
+import matplotlib.pyplot as plt
+
+labels = ['хлопці', 'дівчата']
+sizes = [60, 40]
+colors = ['skyblue', 'pink']
+explode = (0.1, 0)
+
+plt.figure(figsize=(8, 8))
+plt.pie(
+    sizes,
+    labels=labels,
+    autopct='%1.1f%%',
+    startangle=90,
+    colors=colors,
+    explode=explode
+)
+plt.title('розподіл у класі за статтю', fontsize=15)
+plt.axis('equal')
+plt.show()
