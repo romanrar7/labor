@@ -1,0 +1,58 @@
+import random
+
+class Stack:
+    def __init__(self, size):
+        self.stack = []
+        self.size = size
+
+    def is_empty(self):
+        return len(self.stack) == 0
+
+    def is_full(self):
+        return len(self.stack) == self.size
+
+    def push(self, value):
+        if not self.is_full():
+            self.stack.append(value)
+
+    def pop(self):
+        if not self.is_empty():
+            return self.stack.pop()
+
+    def top(self):
+        if not self.is_empty():
+            return self.stack[-1]
+
+    def display(self):
+        return self.stack
+
+
+#розмір стека
+S = 7 * 5 + 50
+
+#створення початкового стека та заповнення його випадковими числами
+initial_stack = Stack(S)
+for _ in range(S):
+    initial_stack.push(random.randint(1, 1000))
+
+#розподіл елементів між двома стеками
+even_stack = Stack(S)
+odd_stack = Stack(S)
+
+while not initial_stack.is_empty():
+    value = initial_stack.pop()
+    if value % 2 == 0:
+        even_stack.push(value)
+    else:
+        odd_stack.push(value)
+
+#функція для форматованого виведення чисел у стовпчик
+def display_in_columns(numbers, columns=3):
+    for i in range(0, len(numbers), columns):
+        print("\t".join(map(str, numbers[i:i + columns])))
+
+#виведення результатів
+print("парні числа:")
+display_in_columns(even_stack.display())
+print("\nнепарні числа:")
+display_in_columns(odd_stack.display())
