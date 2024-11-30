@@ -1,0 +1,23 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+
+
+file_path = 'comptage_velo_2024.csv'
+df_bike = pd.read_csv(file_path)
+df_bike['date'] = pd.to_datetime(df_bike['date'], format='%Y-%m-%d')
+df_bike['month'] = df_bike['date'].dt.month
+monthly_counts = df_bike.groupby('month')['nb_passages'].sum().reset_index()
+
+popular_month = monthly_counts.loc[monthly_counts['nb_passages'].idxmax()]
+print("найпопулярніший місяць:", popular_month['month'])
+print("кількість проходів:", popular_month['nb_passages'])
+
+plt.figure(figsize=(10, 6))
+plt.plot(monthly_counts['month'], monthly_counts['nb_passages'], marker='o')
+plt.title('кількість велосипедистів за місяцями (2024 рік)', fontsize=14)
+plt.xlabel('місяць', fontsize=12)
+plt.ylabel('кількість велосипедистів', fontsize=12)
+plt.xticks(range(1, 11), fontsize=10)
+plt.yticks(fontsize=10)
+plt.grid(True)
+plt.show()
