@@ -1,0 +1,26 @@
+import csv
+import json
+
+csv_file = 'tablica.csv'
+try:
+    with open(csv_file, mode='w', newline='', encoding='utf-8') as file:
+        writer = csv.writer(file)
+        writer.writerow(['id', 'name', 'id2'])
+        writer.writerow([1, 'Bob', 90])
+        writer.writerow([2, 'Bib', 85])
+        writer.writerow([3, 'Bb', 95])
+    print(f"{csv_file} створено")
+except Exception as e:
+    print(f"помилка при створенні {e}")
+
+json_file = 'tablica.json'
+try:
+    with open(csv_file, mode='r', encoding='utf-8') as file:
+        reader = csv.DictReader(file)
+        data = [row for row in reader]
+
+    with open(json_file, mode='w', encoding='utf-8') as file:
+        json.dump(data, file, indent=4)
+    print(f"{json_file} створено.")
+except Exception as e:
+    print(f"помилка конвертації {e}")
