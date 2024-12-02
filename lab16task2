@@ -1,0 +1,26 @@
+import string
+
+input_text = """
+The forest is a magical place, full of vibrant plants, towering trees, and diverse wildlife. 
+People often visit forests to find peace, connect with nature, and escape the noise of modern life. 
+Every season offers a unique experience, from the vibrant colors of autumn leaves to the fresh blooms of spring.
+"""
+
+with open('input_text.txt', 'w') as file:
+    file.write(input_text)
+
+with open('input_text.txt', 'r') as file:
+    text = file.read()
+tokens = text.split()
+
+tokens = [word.strip(string.punctuation).lower() for word in tokens]
+lemmas = [word for word in tokens]
+stems = [word for word in lemmas]
+stop_words = {"is", "a", "the", "and", "on", "using", "that", "of", "between"}
+filtered_words = [word for word in stems if word not in stop_words]
+
+processed_text = ' '.join(filtered_words)
+with open('processed_text.txt', 'w') as file:
+    file.write(processed_text)
+
+print("записано у файл 'processed_text.txt'")
